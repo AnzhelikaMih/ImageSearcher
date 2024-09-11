@@ -20,9 +20,9 @@ class DependencyManager {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor : Resources.Colors.mainTextColor
+                NSAttributedString.Key.foregroundColor : Constants.Colors.mainTextColor
             ]
-            navigationBarAppearance.backgroundColor = Resources.Colors.backgroungColor
+            navigationBarAppearance.backgroundColor = Constants.Colors.backgroungColor
             UINavigationBar.appearance().standardAppearance   = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance    = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance

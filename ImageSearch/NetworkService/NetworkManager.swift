@@ -24,7 +24,7 @@ final class NetworkManager: NetworkManagerProtocol {
         query: String,
         page: Int = 1,
         perPage: Int = 30,
-        orderBy: String? = Resources.Constants.orderBy,
+        orderBy: String? = Constants.Keys.orderBy,
         completion: @escaping HandlerResponse
     ) {
         let config = URLConfiguration(path: .searchPhotos, method: .GET)

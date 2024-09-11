@@ -18,8 +18,8 @@ class SearchResultsViewController: UIViewController {
     private lazy var dataSource = createDataSource()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Constants.historyItemCellIdentifier)
-        tableView.backgroundColor = Resources.Colors.backgroungColor
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.Keys.historyCellKey)
+        tableView.backgroundColor = Constants.Colors.backgroungColor
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -45,8 +45,8 @@ class SearchResultsViewController: UIViewController {
     // MARK: - Methods
     private func createDataSource() -> UITableViewDiffableDataSource<Int, String> {
         dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-            let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Constants.historyItemCellIdentifier, for: indexPath)
-            cell.backgroundColor = Resources.Colors.backgroungColor
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Keys.historyCellKey, for: indexPath)
+            cell.backgroundColor = Constants.Colors.backgroungColor
             cell.textLabel?.text = itemIdentifier
             return cell
         })

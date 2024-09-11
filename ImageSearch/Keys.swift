@@ -1,5 +1,5 @@
 //
-//  Resources.swift
+//  Constants.swift
 //  ImageSearch
 //
 //  Created by Анжелика on 11.09.24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Resources {
+enum Constants {
     enum Colors {
         static let backgroungColor   = UIColor.white
         static let mainTextColor     = UIColor.darkText
@@ -20,9 +20,9 @@ enum Resources {
         static let searchImage = UIImage(systemName: "photo.on.rectangle.angled")
     }
     
-    enum Constants {
-        static let historyItemKey = "HistoryItemKey"
-        static let historyItemCellIdentifier = "HistoryItemCell"
+    enum Keys {
+        static let historyPhotoKey = "HistoryPhotoKey"
+        static let historyCellKey = "HistoryCellKey"
         static let orderBy = "relevant"
     }
     
@@ -31,6 +31,10 @@ enum Resources {
         static let subheading = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let bodyText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let metadata = UIFont.systemFont(ofSize: 12, weight: .light)
+    }
+    
+    enum Errors {
+        static let queryError = "Search query cannot be empty"
     }
 }
 

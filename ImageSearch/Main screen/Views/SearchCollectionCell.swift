@@ -15,7 +15,7 @@ class SearchCollectionCell: UICollectionViewCell {
         image.clipsToBounds = true
         image.layer.cornerRadius = 15 // Больше закруглений
         image.contentMode = .scaleAspectFill
-        image.backgroundColor = Resources.Colors.backgroungSecondryColor.withAlphaComponent(0.8)
+        image.backgroundColor = Constants.Colors.backgroungSecondryColor.withAlphaComponent(0.8)
         return image
     }()
     
@@ -23,7 +23,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.textColor = .black
-        label.font = Resources.Font.subheading
+        label.font = Constants.Font.subheading
         return label
     }()
     
@@ -31,7 +31,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .darkGray
-        label.font = Resources.Font.metadata
+        label.font = Constants.Font.metadata
         return label
     }()
     
@@ -44,7 +44,7 @@ class SearchCollectionCell: UICollectionViewCell {
     }()
     
     private lazy var likesImageView: UIImageView = {
-        let imageView = UIImageView(image: Resources.SystemImage.heart)
+        let imageView = UIImageView(image: Constants.SystemImage.heart)
         imageView.tintColor = .red
         imageView.contentMode = .scaleAspectFit
         return imageView
