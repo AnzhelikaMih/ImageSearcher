@@ -31,13 +31,14 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
         let searchResultsController = SearchResultsViewController()
         searchResultsController.delegate = self
         let searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchBar.tintColor = Resources.Colors.mainTextColor
+        searchController.searchBar.tintColor = Constants.Colors.mainTextColor
         return searchController
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Resources.SystemImage.searchImage
+        imageView.image = Constants.SystemImage.searchImage
+        imageView.tintColor = .lightGray
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -47,7 +48,7 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
     init(presenter: MainPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        self.presenter.setView(view: self)
+        self.presenter.attachView(view: self)
     }
     
     required init?(coder: NSCoder) {
@@ -62,7 +63,7 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
     
     // MARK: - Setup view methods
     private func setupView() {
-        view.backgroundColor = Resources.Colors.backgroungColor
+        view.backgroundColor = Constants.Colors.backgroungColor
         setupCollectionView()
         setupActivityIndicator()
         setupNavigationBar()
@@ -76,8 +77,8 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 300),
-            imageView.heightAnchor.constraint(equalToConstant: 300)
+            imageView.widthAnchor.constraint(equalToConstant: 240),
+            imageView.heightAnchor.constraint(equalToConstant: 240)
         ])
     }
     
@@ -90,7 +91,7 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
         colletionView.dataSource = self
         colletionView.alwaysBounceVertical = true
         
-        colletionView.backgroundColor = Resources.Colors.backgroungColor
+        colletionView.backgroundColor = Constants.Colors.backgroungColor
         colletionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -163,13 +164,13 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
     private func searchItems(term: String) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(searchDone))
         searchController.isActive = false
-        presenter.searchItems(term: term)
+        presenter.performPhotoSearch(query: term)
         searchController.searchBar.text = term
     }
     
     // MARK: - @objc methods
     @objc func searchDone() {
-        presenter.resetSearchItems()
+        presenter.resetPhotoSearch()
         imageView.isHidden = false
     }
     
@@ -225,7 +226,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             guard presenter.hasMorePhotos else { return }
             
             page += 1
-            presenter.searchItems(term: searchController.searchBar.text ?? "", page: page)
+            presenter.performPhotoSearch(query: searchController.searchBar.text ?? "", page: page)
         }
     }
     
@@ -242,7 +243,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.presenter.goToPhotoDetails(selectedItemIdx: indexPath.item)
+        self.presenter.goToPhotoDetails(selectedIndex: indexPath.item)
     }
 }
 
@@ -256,7 +257,7 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.isActive {
-            presenter.getHistoryItems(term: searchController.searchBar.text ?? "")
+            presenter.getPreviousResults(term: searchController.searchBar.text ?? "")
         }
     }
 }

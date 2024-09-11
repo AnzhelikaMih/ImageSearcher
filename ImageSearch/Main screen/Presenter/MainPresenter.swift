@@ -6,58 +6,52 @@
 //
 
 import UIKit
-import Dispatch
-
-protocol MainPresenterProtocol {
-    func searchItems(term: String, page: Int, sorderBy: String)
-    func resetSearchItems()
-    func getHistoryItems(term: String?)
-    func goToPhotoDetails(selectedItemIdx: Int)
-}
 
 final class MainPresenter: MainPresenterProtocol {
     
+    // MARK: - Properties
     weak private var view: SearchViewControllerProtocol?
-    private let networkManager: NetworkManagerProtocol
-    var totalPages: Int = 0
-    var hasMorePhotos = true
-    private var term: String = ""
-    private var currentPhotoResponse: Response?
+    private let networkService: NetworkManagerProtocol
+    private var photoSearchResponse: Response?
+    
+    private(set) var totalPages: Int = 0
+    private(set) var hasMorePhotos = true
+    private var term: String = .init()
+    
+    
+    // MARK: - Initializaton
     init() {
-        self.networkManager = NetworkManager()
+        self.networkService = NetworkManager()
     }
     
-    func setView(view: SearchViewControllerProtocol) {
+    // MARK: - Public functions
+    func attachView(view: SearchViewControllerProtocol) {
         self.view = view
     }
     
-    private func saveTerm(term: String) {
-        var allHistoryItems = UserDefaults.standard.stringArray(forKey: Resources.Constants.historyItemKey) ?? []
-        if let idx = allHistoryItems.firstIndex(of: term) {
-            allHistoryItems.remove(at: idx)
-        }
-        allHistoryItems.append(term)
-        UserDefaults.standard.set(allHistoryItems, forKey: Resources.Constants.historyItemKey)
-    }
-    
-    func searchItems(term: String, page: Int = 1, sorderBy: String = Resources.Constants.orderBy) {
+    func performPhotoSearch(query: String,
+                            page: Int = 1,
+                            orderBy: String = Constants.Keys.orderBy
+    ) {
         DispatchQueue.main.async {
             self.view?.startActivityIndicator()
         }
+        
         DispatchQueue.global().async {
-            self.saveTerm(term: term)
-            self.term = term
-            self.networkManager.searchPhotos(query: term, page: page, perPage: 30, orderBy: sorderBy) { result in
+            self.saveItemsToSeacrhHistory(term: query)
+            self.term = query
+            self.networkService.searchPhotos(query: self.term, page: page, perPage: 30, orderBy: orderBy) { result in
                 switch result {
                 case .success(let response):
-                    self.currentPhotoResponse = response
+                    self.photoSearchResponse = response
                     self.totalPages = response.totalPages
+                    
                     DispatchQueue.main.async {
                         self.view?.stopActivityIndicator()
                         if page == 1 {
                             self.view?.updateSearch(photos: response.results)
                         } else {
-                            self.view?.updateSearch(photos: self.currentPhotoResponse?.results ?? [])
+                            self.view?.updateSearch(photos: self.photoSearchResponse?.results ?? [])
                         }
                         self.hasMorePhotos = page < self.totalPages
                     }
@@ -71,18 +65,18 @@ final class MainPresenter: MainPresenterProtocol {
         }
     }
     
-    func resetSearchItems() {
-        currentPhotoResponse = nil
+    func resetPhotoSearch() {
+        photoSearchResponse = nil
         view?.updateSearch(photos: [])
         view?.resetView()
     }
     
-    func getHistoryItems(term: String?) {
+    func getPreviousResults(term: String?) {
         guard let term = term else {
             self.view?.updateHistory(queries: [])
             return
         }
-        let allHistoryItems = UserDefaults.standard.stringArray(forKey: Resources.Constants.historyItemKey) ?? []
+        let allHistoryItems = UserDefaults.standard.stringArray(forKey: Constants.Keys.historyPhotoKey) ?? []
         let historyItems: [String]
         if term == "" {
             historyItems = Array<String>(allHistoryItems.suffix(5).reversed())
@@ -92,11 +86,19 @@ final class MainPresenter: MainPresenterProtocol {
         self.view?.updateHistory(queries: historyItems)
     }
     
-    func goToPhotoDetails(selectedItemIdx: Int) {
-        guard let currentPhotoResponse = currentPhotoResponse else { return }
-        let selectedPhoto = currentPhotoResponse.results[selectedItemIdx]
+    func goToPhotoDetails(selectedIndex: Int) {
+        guard let currentPhotoResponse = photoSearchResponse else { return }
+        let selectedPhoto = currentPhotoResponse.results[selectedIndex]
         view?.goToPhotoDetails(photo: selectedPhoto)
     }
     
+    private func saveItemsToSeacrhHistory(term: String) {
+        var photosToHistory = UserDefaults.standard.stringArray(forKey: Constants.Keys.historyPhotoKey) ?? []
+        if let index = photosToHistory.firstIndex(of: term) {
+            photosToHistory.remove(at: index)
+        }
+        photosToHistory.append(term)
+        UserDefaults.standard.set(photosToHistory, forKey: Constants.Keys.historyPhotoKey)
+    }
 }
 
