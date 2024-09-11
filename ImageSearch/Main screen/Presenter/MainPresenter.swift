@@ -10,7 +10,7 @@ import UIKit
 final class MainPresenter: MainPresenterProtocol {
     
     // MARK: - Properties
-    weak private var view: SearchViewControllerProtocol?
+    weak private var view: MainViewControllerProtocol?
     private let networkService: NetworkManagerProtocol
     private let userDefaultsManager: UserDefaultsManager
     private var photoSearchResponse: Response?
@@ -27,7 +27,7 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     // MARK: - Public functions
-    func attachView(view: SearchViewControllerProtocol) {
+    func attachView(view: MainViewControllerProtocol) {
         self.view = view
     }
     

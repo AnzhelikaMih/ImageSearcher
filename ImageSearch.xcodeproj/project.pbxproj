@@ -32,7 +32,6 @@
 		42F10E952C9199A900A8C2B3 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E942C9199A900A8C2B3 /* NetworkManagerProtocol.swift */; };
 		42F10E972C91A2E000A8C2B3 /* URLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */; };
 		42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */; };
-		42F10E9F2C91D45B00A8C2B3 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */; };
 		42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +82,6 @@
 		42F10E942C9199A900A8C2B3 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfiguration.swift; sourceTree = "<group>"; };
 		42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
-		42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,7 +140,6 @@
 				42F10EA02C91DBF100A8C2B3 /* UserDefaultsService */,
 				42F10E712C9178FC00A8C2B3 /* Supplements */,
 				42F10E982C91A55300A8C2B3 /* Main screen */,
-				42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */,
 				42F10E9A2C91A65000A8C2B3 /* Detailed screen */,
 				42F10E3D2C91770000A8C2B3 /* Assets.xcassets */,
 				42F10E3F2C91770000A8C2B3 /* LaunchScreen.storyboard */,
@@ -400,7 +397,6 @@
 				42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */,
 				42F10E752C91793100A8C2B3 /* UIViewController+.swift in Sources */,
 				42F10E702C9178EE00A8C2B3 /* NetworkError.swift in Sources */,
-				42F10E9F2C91D45B00A8C2B3 /* MainRouter.swift in Sources */,
 				42F10E6B2C91780500A8C2B3 /* Image.swift in Sources */,
 				42F10E8B2C917B2C00A8C2B3 /* DetailedPresenter.swift in Sources */,
 				42F10E8F2C917B9E00A8C2B3 /* SearchResultsViewController.swift in Sources */,

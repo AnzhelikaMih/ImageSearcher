@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SearchViewControllerProtocol: AnyObject {
+protocol MainViewControllerProtocol: AnyObject {
     func handleError(_ message: String)
     func updateSearch(photos: [Image])
     func updateHistory(queries: [String])
@@ -17,7 +17,7 @@ protocol SearchViewControllerProtocol: AnyObject {
     func goToPhotoDetails(photo: Image)
 }
 
-class SearchViewController: UIViewController, SearchViewControllerProtocol {
+class MainViewController: UIViewController, MainViewControllerProtocol {
     // MARK: - Properties
     var presenter: MainPresenter
     private var photos: [Image] = []
@@ -202,7 +202,7 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
 }
 
 // MARK: - CollectionView's extensions
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
@@ -243,13 +243,13 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 }
 
 // MARK: - Search's extensions
-extension SearchViewController: SearchResultsViewControllerDelegate {
+extension MainViewController: SearchResultsViewControllerDelegate {
     func didSelectHistoryItem(historyItem: String) {
         searchItems(term: historyItem)
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
+extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.isActive {
             presenter.getPreviousResults(term: searchController.searchBar.text ?? "")
@@ -257,7 +257,7 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
-extension SearchViewController: UISearchBarDelegate {
+extension MainViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         imageView.isHidden = true
     }

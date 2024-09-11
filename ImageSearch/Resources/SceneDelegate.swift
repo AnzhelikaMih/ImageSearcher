@@ -9,7 +9,7 @@ import UIKit
 class DependencyManager {
     static func createSearchNC() -> UIViewController {
         let presenter = MainPresenter()
-        let searchVC = SearchViewController(presenter: presenter)
+        let searchVC = MainViewController(presenter: presenter)
         searchVC.title = "ImageSearcher"
         return searchVC
     }
