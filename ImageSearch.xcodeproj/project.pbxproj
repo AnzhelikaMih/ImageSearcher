@@ -22,7 +22,7 @@
 		42F10E752C91793100A8C2B3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E742C91793100A8C2B3 /* UIViewController+.swift */; };
 		42F10E782C91797D00A8C2B3 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E772C91797D00A8C2B3 /* Alert.swift */; };
 		42F10E7C2C9179B600A8C2B3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E7B2C9179B600A8C2B3 /* LoadingView.swift */; };
-		42F10E7E2C917A0D00A8C2B3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E7D2C917A0D00A8C2B3 /* Keys.swift */; };
+		42F10E7E2C917A0D00A8C2B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E7D2C917A0D00A8C2B3 /* Constants.swift */; };
 		42F10E892C917B0200A8C2B3 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */; };
 		42F10E8B2C917B2C00A8C2B3 /* DetailedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */; };
 		42F10E8D2C917B6900A8C2B3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E8C2C917B6900A8C2B3 /* MainViewController.swift */; };
@@ -33,6 +33,7 @@
 		42F10E972C91A2E000A8C2B3 /* URLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */; };
 		42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */; };
 		42F10E9F2C91D45B00A8C2B3 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */; };
+		42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +73,7 @@
 		42F10E742C91793100A8C2B3 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		42F10E772C91797D00A8C2B3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		42F10E7B2C9179B600A8C2B3 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		42F10E7D2C917A0D00A8C2B3 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		42F10E7D2C917A0D00A8C2B3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenter.swift; sourceTree = "<group>"; };
 		42F10E8C2C917B6900A8C2B3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfiguration.swift; sourceTree = "<group>"; };
 		42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
 		42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,15 +135,16 @@
 		42F10E332C9176FE00A8C2B3 /* ImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				42F10E7D2C917A0D00A8C2B3 /* Constants.swift */,
 				42F10E6E2C91783A00A8C2B3 /* Resources */,
 				42F10E762C91796400A8C2B3 /* CustomViews */,
 				42F10E662C91779B00A8C2B3 /* NetworkService */,
+				42F10EA02C91DBF100A8C2B3 /* UserDefaultsService */,
 				42F10E712C9178FC00A8C2B3 /* Supplements */,
 				42F10E982C91A55300A8C2B3 /* Main screen */,
 				42F10E9E2C91D45B00A8C2B3 /* MainRouter.swift */,
 				42F10E9A2C91A65000A8C2B3 /* Detailed screen */,
 				42F10E3D2C91770000A8C2B3 /* Assets.xcassets */,
-				42F10E7D2C917A0D00A8C2B3 /* Keys.swift */,
 				42F10E3F2C91770000A8C2B3 /* LaunchScreen.storyboard */,
 				42F10E422C91770000A8C2B3 /* Info.plist */,
 			);
@@ -248,6 +251,14 @@
 				42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		42F10EA02C91DBF100A8C2B3 /* UserDefaultsService */ = {
+			isa = PBXGroup;
+			children = (
+				42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaultsService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +395,7 @@
 				42F10E932C917BD600A8C2B3 /* MainPresenter.swift in Sources */,
 				42F10E972C91A2E000A8C2B3 /* URLConfiguration.swift in Sources */,
 				42F10E892C917B0200A8C2B3 /* DetailedViewController.swift in Sources */,
+				42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */,
 				42F10E912C917BBF00A8C2B3 /* SearchCollectionCell.swift in Sources */,
 				42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */,
 				42F10E752C91793100A8C2B3 /* UIViewController+.swift in Sources */,
@@ -396,7 +408,7 @@
 				42F10E692C9177D000A8C2B3 /* Response.swift in Sources */,
 				42F10E782C91797D00A8C2B3 /* Alert.swift in Sources */,
 				42F10E352C9176FE00A8C2B3 /* AppDelegate.swift in Sources */,
-				42F10E7E2C917A0D00A8C2B3 /* Keys.swift in Sources */,
+				42F10E7E2C917A0D00A8C2B3 /* Constants.swift in Sources */,
 				42F10E952C9199A900A8C2B3 /* NetworkManagerProtocol.swift in Sources */,
 				42F10E372C9176FE00A8C2B3 /* SceneDelegate.swift in Sources */,
 				42F10E7C2C9179B600A8C2B3 /* LoadingView.swift in Sources */,

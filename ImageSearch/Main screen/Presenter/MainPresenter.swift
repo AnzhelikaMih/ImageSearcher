@@ -12,6 +12,7 @@ final class MainPresenter: MainPresenterProtocol {
     // MARK: - Properties
     weak private var view: SearchViewControllerProtocol?
     private let networkService: NetworkManagerProtocol
+    private let userDefaultsManager: UserDefaultsManager
     private var photoSearchResponse: Response?
     
     private(set) var totalPages: Int = 0
@@ -22,6 +23,7 @@ final class MainPresenter: MainPresenterProtocol {
     // MARK: - Initializaton
     init() {
         self.networkService = NetworkManager()
+        self.userDefaultsManager = UserDefaultsManager()
     }
     
     // MARK: - Public functions
@@ -38,7 +40,7 @@ final class MainPresenter: MainPresenterProtocol {
         }
         
         DispatchQueue.global().async {
-            self.saveItemsToSeacrhHistory(term: query)
+            self.userDefaultsManager.saveSearchQuery(query)
             self.term = query
             self.networkService.searchPhotos(query: self.term, page: page, perPage: 30, orderBy: orderBy) { result in
                 switch result {
@@ -72,33 +74,14 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     func getPreviousResults(term: String?) {
-        guard let term = term else {
-            self.view?.updateHistory(queries: [])
-            return
-        }
-        let allHistoryItems = UserDefaults.standard.stringArray(forKey: Constants.Keys.historyPhotoKey) ?? []
-        let historyItems: [String]
-        if term == "" {
-            historyItems = Array<String>(allHistoryItems.suffix(5).reversed())
-        } else {
-            historyItems = Array<String>(allHistoryItems.filter { $0.lowercased().contains(term.lowercased()) }.suffix(5).reversed())
-        }
-        self.view?.updateHistory(queries: historyItems)
+        let historyItems = userDefaultsManager.getFilteredSearchHistory(for: term ?? .init())
+        view?.updateHistory(queries: historyItems)
     }
     
     func goToPhotoDetails(selectedIndex: Int) {
         guard let currentPhotoResponse = photoSearchResponse else { return }
         let selectedPhoto = currentPhotoResponse.results[selectedIndex]
         view?.goToPhotoDetails(photo: selectedPhoto)
-    }
-    
-    private func saveItemsToSeacrhHistory(term: String) {
-        var photosToHistory = UserDefaults.standard.stringArray(forKey: Constants.Keys.historyPhotoKey) ?? []
-        if let index = photosToHistory.firstIndex(of: term) {
-            photosToHistory.remove(at: index)
-        }
-        photosToHistory.append(term)
-        UserDefaults.standard.set(photosToHistory, forKey: Constants.Keys.historyPhotoKey)
     }
 }
 

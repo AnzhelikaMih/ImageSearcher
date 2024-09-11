@@ -162,17 +162,12 @@ class SearchViewController: UIViewController, SearchViewControllerProtocol {
     }
     
     private func searchItems(term: String) {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(searchDone))
         searchController.isActive = false
         presenter.performPhotoSearch(query: term)
         searchController.searchBar.text = term
     }
     
-    // MARK: - @objc methods
-    @objc func searchDone() {
-        presenter.resetPhotoSearch()
-        imageView.isHidden = false
-    }
+
     
     // MARK: - methods
     func handleError(_ message: String) {
@@ -275,6 +270,12 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchDone()
+        imageView.isHidden = false
+    }
+    
+    // MARK: - @objc methods
+    @objc func searchDone() {
+        presenter.resetPhotoSearch()
         imageView.isHidden = false
     }
 }
