@@ -7,34 +7,31 @@
 
 import Foundation
 
-class URLConfiguration {
+struct URLConfiguration {
     let baseURL: String
     let accessKey: String
-    let endpoint: Endpoint
-    let httpMethod: HTTPMethod
+    let path: Path
+    let method: HTTPMethod
     
     init(
         baseURL: String = "https://api.unsplash.com",
         accessKey: String = "9rmQ1eV_ZuZSBSu3Mq76sfGeBQqZ42ZR4mFr8oXaq80",
-        endpoint: Endpoint,
-        httpMethod: HTTPMethod
+        path: Path,
+        method: HTTPMethod
     ) {
         self.baseURL = baseURL
         self.accessKey = accessKey
-        self.endpoint = endpoint
-        self.httpMethod = httpMethod
+        self.path = path
+        self.method = method
     }
     
-    enum Endpoint: String {
-        case search = "/search/photos"
-        case photos = "/photos"
-        case users = "/users"
+    enum Path: String {
+        case searchPhotos = "/search/photos"
+        case fetchPhotos = "/photos"
+        case fetchUsers = "/users"
     }
     
     enum HTTPMethod: String {
-        case get = "GET"
-        case post = "POST"
-        case put = "PUT"
-        case patch = "PATCH"
+        case GET, POST, PUT, PATCH
     }
 }

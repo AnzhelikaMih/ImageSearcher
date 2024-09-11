@@ -7,11 +7,11 @@
 
 // MARK: - NetworkManagerProtocol
 protocol NetworkManagerProtocol {
-    typealias HandlerImageResponse = (Result<ImageResponse, NetworkError>) -> Void
+    typealias HandlerResponse = (Result<Response, NetworkError>) -> Void
     typealias HandlerImage = (Result<Image, NetworkError>) -> Void
     typealias HandlerUser = (Result<User, NetworkError>) -> Void
     
-    func fetchPhotoResponse(query: String, page: Int?, perPage: Int?, sorderBy: String?, completion: @escaping HandlerImageResponse)
+    func searchPhotos(query: String, page: Int, perPage: Int, orderBy: String?, completion: @escaping HandlerResponse)
     func fetchPhoto(by id: String, completion: @escaping HandlerImage)
     func fetchUser(by username: String, completion: @escaping HandlerUser)
 }

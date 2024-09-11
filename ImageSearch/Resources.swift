@@ -23,7 +23,7 @@ enum Resources {
     enum Constants {
         static let historyItemKey = "HistoryItemKey"
         static let historyItemCellIdentifier = "HistoryItemCell"
-        static let sortedBy = "relevant"
+        static let orderBy = "relevant"
     }
     
     enum Font {

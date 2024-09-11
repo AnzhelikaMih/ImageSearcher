@@ -1,11 +1,11 @@
 //
-//  ImageResponse.swift
+//  Response.swift
 //  ImageSearch
 //
 //  Created by Анжелика on 11.09.24.
 //
 
-struct ImageResponse: Codable {
+struct Response: Codable {
     let total: Int
     let totalPages: Int
     let results: [Image]

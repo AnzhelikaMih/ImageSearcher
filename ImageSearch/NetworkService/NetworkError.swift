@@ -5,9 +5,7 @@
 //  Created by Анжелика on 11.09.24.
 //
 
-import Foundation
-
-enum NetworkError: Error, LocalizedError {
+enum NetworkError: Error {
     
     case invalidURL
     case unableToComplete

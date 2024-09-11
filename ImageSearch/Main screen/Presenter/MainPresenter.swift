@@ -22,7 +22,7 @@ final class MainPresenter: MainPresenterProtocol {
     var totalPages: Int = 0
     var hasMorePhotos = true
     private var term: String = ""
-    private var currentPhotoResponse: ImageResponse?
+    private var currentPhotoResponse: Response?
     init() {
         self.networkManager = NetworkManager()
     }
@@ -40,14 +40,14 @@ final class MainPresenter: MainPresenterProtocol {
         UserDefaults.standard.set(allHistoryItems, forKey: Resources.Constants.historyItemKey)
     }
     
-    func searchItems(term: String, page: Int = 1, sorderBy: String = Resources.Constants.sortedBy) {
+    func searchItems(term: String, page: Int = 1, sorderBy: String = Resources.Constants.orderBy) {
         DispatchQueue.main.async {
             self.view?.startActivityIndicator()
         }
         DispatchQueue.global().async {
             self.saveTerm(term: term)
             self.term = term
-            self.networkManager.fetchPhotoResponse(query: term, page: page, perPage: 30, sorderBy: sorderBy) { result in
+            self.networkManager.searchPhotos(query: term, page: page, perPage: 30, orderBy: sorderBy) { result in
                 switch result {
                 case .success(let response):
                     self.currentPhotoResponse = response
