@@ -38,19 +38,33 @@ class DetailViewController: UIViewController {
         label.textColor = Constants.Colors.mainTextColor
         label.font = UIFont.italicSystemFont(ofSize: 14)
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Save to Gallery".uppercased(), for: .normal)
+        button.setTitle(Constants.Titles.saveButton.uppercased(), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(saveImageToGallery), for: .touchUpInside)
-        button.backgroundColor = .gray
+        button.backgroundColor = Constants.Colors.buttonColor
         button.layer.cornerRadius = 15
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private lazy var shareButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(Constants.Titles.shareButton.uppercased(), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
+        button.backgroundColor = Constants.Colors.buttonColorLight
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     // MARK: - Initialization
@@ -77,13 +91,20 @@ class DetailViewController: UIViewController {
         view.addSubview(descriptionLabel)
         view.addSubview(authorLabel)
         view.addSubview(saveButton)
+        view.addSubview(shareButton)
+        view.addSubview(loadingIndicator)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -97,10 +118,15 @@ class DetailViewController: UIViewController {
             authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             authorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            saveButton.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            saveButton.bottomAnchor.constraint(equalTo: shareButton.topAnchor, constant: -10),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            saveButton.heightAnchor.constraint(equalToConstant: 42)
+            saveButton.heightAnchor.constraint(equalToConstant: 42),
+            
+            shareButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            shareButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            shareButton.heightAnchor.constraint(equalToConstant: 42)
         ])
     }
     
@@ -113,13 +139,29 @@ class DetailViewController: UIViewController {
     }
     
     private func loadImage(from url: URL) {
+        loadingIndicator.startAnimating()
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     self.imageView.image = image
+                    self.loadingIndicator.stopAnimating()
                 }
             }
         }
+    }
+    
+    // MARK: - @objc private functions
+    @objc private func shareImage() {
+        guard let image = imageView.image else { return }
+        
+        let activityViewController = UIActivityViewController(
+            activityItems: [image],
+            applicationActivities: nil
+        )
+        
+        activityViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        
+        present(activityViewController, animated: true, completion: nil)
     }
     
     @objc private func saveImageToGallery() {
