@@ -13,9 +13,8 @@ class SearchCollectionCell: UICollectionViewCell {
     private let mainImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
-        image.layer.cornerRadius = 15 // Больше закруглений
+        image.layer.cornerRadius = 15
         image.contentMode = .scaleAspectFill
-        image.backgroundColor = Constants.Colors.backgroungSecondryColor.withAlphaComponent(0.8)
         return image
     }()
     
@@ -31,7 +30,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .darkGray
-        label.font = Constants.Font.metadata
+        label.font = Constants.Font.likesText
         return label
     }()
     
@@ -50,6 +49,14 @@ class SearchCollectionCell: UICollectionViewCell {
         return imageView
     }()
     
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textColor = .darkGray
+        label.font = Constants.Font.likesText
+        return label
+    }()
+    
     private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.hidesWhenStopped = true
@@ -62,6 +69,7 @@ class SearchCollectionCell: UICollectionViewCell {
         contentView.addSubview(mainImageView)
         contentView.addSubview(likesStackView)
         contentView.addSubview(descriptionLabel)
+        contentView.addSubview(dateLabel)
         contentView.addSubview(loadingIndicator)
         setupConstraints()
     }
@@ -75,23 +83,24 @@ class SearchCollectionCell: UICollectionViewCell {
         mainImageView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         likesStackView.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            // Увеличенное изображение
-            mainImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            mainImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1),
             mainImageView.heightAnchor.constraint(equalTo: mainImageView.widthAnchor),
-            mainImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            mainImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            mainImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            mainImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             loadingIndicator.centerXAnchor.constraint(equalTo: mainImageView.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: mainImageView.centerYAnchor),
             
-            // likesStackView под изображением слева
             likesStackView.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 10),
             likesStackView.leadingAnchor.constraint(equalTo: mainImageView.leadingAnchor),
             
-            // descriptionLabel ниже likesStackView и выровнено по левому краю
+            dateLabel.centerYAnchor.constraint(equalTo: likesStackView.centerYAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: mainImageView.trailingAnchor),
+            
             descriptionLabel.topAnchor.constraint(equalTo: likesStackView.bottomAnchor, constant: 5),
             descriptionLabel.leadingAnchor.constraint(equalTo: mainImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -100,17 +109,34 @@ class SearchCollectionCell: UICollectionViewCell {
     }
     
     func configureCell(photo: Image) {
-        descriptionLabel.text = photo.description ?? "No description"
+        descriptionLabel.text = photo.altDescription ?? "No description"
+        dateLabel.text = formatDate(from: photo.createdAt)
         likesLabel.text = String(photo.likes ?? 0)
         
         guard let urlPhoto = photo.urls?.regular else { return }
         loadingIndicator.startAnimating()
+        
         NetworkManager.shared.downloadImage(from: urlPhoto) { [weak self] image in
             DispatchQueue.main.async {
                 self?.mainImageView.image = image
                 self?.loadingIndicator.stopAnimating()
             }
         }
+    }
+    
+    private func formatDate(from isoDate: String?) -> String {
+        guard let isoDate = isoDate else { return "Unknown date" }
+        
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime]
+        
+        if let date = isoFormatter.date(from: isoDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            return dateFormatter.string(from: date)
+        }
+        
+        return "Invalid date"
     }
 }
 
