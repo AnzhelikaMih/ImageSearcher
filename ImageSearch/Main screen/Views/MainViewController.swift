@@ -7,17 +7,7 @@
 
 import UIKit
 
-protocol MainViewControllerProtocol: AnyObject {
-    func handleError(_ message: String)
-    func updateSearch(photos: [Image])
-    func updateHistory(queries: [String])
-    func startActivityIndicator()
-    func stopActivityIndicator()
-    func resetView()
-    func goToPhotoDetails(photo: Image)
-}
-
-class MainViewController: UIViewController, MainViewControllerProtocol {
+final class MainViewController: UIViewController, MainViewControllerProtocol {
     // MARK: - Properties
     var presenter: MainPresenter
     private var photos: [Image] = []
@@ -25,10 +15,10 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
     
     // MARK: - Components
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
-    private lazy var colletionView = UICollectionView(frame: view.bounds, collectionViewLayout: createTwoColumnFlowLayout())
+    private lazy var colleсtionView = UICollectionView(frame: view.bounds, collectionViewLayout: createTwoColumnsLayout())
     
     private lazy var searchController: UISearchController = {
-        let searchResultsController = SearchResultsViewController()
+        let searchResultsController = HistoryResultsViewController()
         searchResultsController.delegate = self
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchBar.tintColor = Constants.Colors.mainTextColor
@@ -38,7 +28,7 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Constants.SystemImage.searchImage
-        imageView.tintColor = .lightGray
+        imageView.tintColor = Constants.Colors.secondaryBackgroungColor.withAlphaComponent(0.5)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -48,7 +38,7 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
     init(presenter: MainPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        self.presenter.attachView(view: self)
+        self.presenter.loadView(controller: self)
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +51,7 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
         setupView()
     }
     
-    // MARK: - Setup view methods
+    // MARK: - Private functions
     private func setupView() {
         view.backgroundColor = Constants.Colors.backgroungColor
         setupCollectionView()
@@ -77,35 +67,36 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 240),
-            imageView.heightAnchor.constraint(equalToConstant: 240)
+            imageView.widthAnchor.constraint(equalToConstant: 150),
+            imageView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
     private func setupCollectionView() {
-        view.addSubview(colletionView)
+        view.addSubview(colleсtionView)
         
-        colletionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: SearchCollectionCell.reuseIdentifier)
-        colletionView.register(LoadingView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingView.reuseId)
-        colletionView.delegate = self
-        colletionView.dataSource = self
-        colletionView.alwaysBounceVertical = true
+        colleсtionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: Constants.Keys.reuseIdentifierCell)
+        colleсtionView.register(LoadingView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: Constants.Keys.loadingReuseId)
+        colleсtionView.delegate = self
+        colleсtionView.dataSource = self
+        colleсtionView.alwaysBounceVertical = true
         
-        colletionView.backgroundColor = Constants.Colors.backgroungColor
-        colletionView.translatesAutoresizingMaskIntoConstraints = false
+        colleсtionView.backgroundColor = Constants.Colors.backgroungColor
+        colleсtionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            colletionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            colletionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            colletionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            colletionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            colleсtionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            colleсtionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            colleсtionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            colleсtionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
     
     private func setupSearchController() {
         searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Enter to search"
+        searchController.searchBar.placeholder = Constants.Titles.placeholder
+        searchController.searchBar.tintColor = Constants.Colors.mainTextColor
         searchController.searchBar.delegate = self
         searchController.showsSearchResultsController = true
     }
@@ -121,32 +112,36 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "ImageSearcher"
-        navigationItem.backButtonTitle = "Back"
+        navigationItem.title = Constants.Titles.appTitle
+        navigationItem.backButtonTitle = Constants.Titles.backButton
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    func createTwoColumnFlowLayout() -> UICollectionViewFlowLayout {
+    private func createTwoColumnsLayout() -> UICollectionViewFlowLayout {
         let width = view.bounds.width
         let padding: CGFloat = 16
-        let minimumItemSpacing: CGFloat = 10
-        let numberOfColumns = 2
+        let numberOfColumns: CGFloat = 2
         
-        let totalHorizontalPadding = padding * 2
-        let totalSpacing = minimumItemSpacing * CGFloat(numberOfColumns - 1)
-        let availableWidth = width - totalHorizontalPadding - totalSpacing
-        let itemWidth = availableWidth / CGFloat(numberOfColumns)
+        let totalHorizontalSpacing = padding * numberOfColumns
+        let availableWidth = width - totalHorizontalSpacing - padding
+        let itemWidth = availableWidth / numberOfColumns
         
         let itemHeight: CGFloat = 270
         
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.minimumInteritemSpacing = minimumItemSpacing
-        flowLayout.minimumLineSpacing = minimumItemSpacing
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        layout.minimumInteritemSpacing = padding
+        layout.minimumLineSpacing = padding
+        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         
-        return flowLayout
+        return layout
+    }
+    
+    private func searchItems(term: String) {
+        searchController.isActive = false
+        presenter.performPhotoSearch(query: term)
+        searchController.searchBar.text = term
     }
     
     // MARK: - Search methods
@@ -157,19 +152,11 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
             self.photos.append(contentsOf: photos)
         }
         DispatchQueue.main.async {
-            self.colletionView.reloadData()
+            self.colleсtionView.reloadData()
         }
     }
     
-    private func searchItems(term: String) {
-        searchController.isActive = false
-        presenter.performPhotoSearch(query: term)
-        searchController.searchBar.text = term
-    }
-    
-
-    
-    // MARK: - methods
+    // MARK: - Public functions
     func handleError(_ message: String) {
         let attribute = Alert.Attribute(
             message: message)
@@ -190,7 +177,7 @@ class MainViewController: UIViewController, MainViewControllerProtocol {
     }
     
     func updateHistory(queries: [String]) {
-        if let searchResultsController = searchController.searchResultsController as? SearchResultsViewController {
+        if let searchResultsController = searchController.searchResultsController as? HistoryResultsViewController {
             searchResultsController.updateView(historyItems: queries)
         }
     }
@@ -208,7 +195,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionCell.reuseIdentifier, for: indexPath) as! SearchCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Keys.reuseIdentifierCell, for: indexPath) as! SearchCollectionCell
         cell.configureCell(photo: photos[indexPath.item])
         return cell
     }
@@ -227,7 +214,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoadingView.reuseId, for: indexPath) as! LoadingView
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.Keys.loadingReuseId, for: indexPath) as! LoadingView
             return footer
         }
         return UICollectionReusableView()
@@ -243,7 +230,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 }
 
 // MARK: - Search's extensions
-extension MainViewController: SearchResultsViewControllerDelegate {
+extension MainViewController: HistoryResultsViewControllerDelegate {
     func didSelectHistoryItem(historyItem: String) {
         searchItems(term: historyItem)
     }
