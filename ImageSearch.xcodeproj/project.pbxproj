@@ -21,7 +21,6 @@
 		42F10E7C2C9179B600A8C2B3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E7B2C9179B600A8C2B3 /* LoadingView.swift */; };
 		42F10E7E2C917A0D00A8C2B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E7D2C917A0D00A8C2B3 /* Constants.swift */; };
 		42F10E892C917B0200A8C2B3 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */; };
-		42F10E8B2C917B2C00A8C2B3 /* DetailedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */; };
 		42F10E8D2C917B6900A8C2B3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E8C2C917B6900A8C2B3 /* MainViewController.swift */; };
 		42F10E8F2C917B9E00A8C2B3 /* HistoryResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E8E2C917B9E00A8C2B3 /* HistoryResultsViewController.swift */; };
 		42F10E912C917BBF00A8C2B3 /* SearchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E902C917BBF00A8C2B3 /* SearchCollectionCell.swift */; };
@@ -30,10 +29,8 @@
 		42F10E972C91A2E000A8C2B3 /* URLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */; };
 		42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */; };
 		42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */; };
-		42F10EA42C92DF9700A8C2B3 /* DetailedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */; };
 		42F10EAA2C92EA8400A8C2B3 /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */; };
 		42F10EAC2C93154300A8C2B3 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EAB2C93154300A8C2B3 /* String+.swift */; };
-		42F10EAE2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +69,6 @@
 		42F10E7B2C9179B600A8C2B3 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		42F10E7D2C917A0D00A8C2B3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
-		42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenter.swift; sourceTree = "<group>"; };
 		42F10E8C2C917B6900A8C2B3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		42F10E8E2C917B9E00A8C2B3 /* HistoryResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryResultsViewController.swift; sourceTree = "<group>"; };
 		42F10E902C917BBF00A8C2B3 /* SearchCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionCell.swift; sourceTree = "<group>"; };
@@ -81,10 +77,8 @@
 		42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfiguration.swift; sourceTree = "<group>"; };
 		42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
 		42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenterProtocol.swift; sourceTree = "<group>"; };
 		42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
 		42F10EAB2C93154300A8C2B3 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,9 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */,
-				42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */,
-				42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */,
-				42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */,
 			);
 			path = "Detailed screen";
 			sourceTree = "<group>";
@@ -382,12 +373,10 @@
 				42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */,
 				42F10E912C917BBF00A8C2B3 /* SearchCollectionCell.swift in Sources */,
 				42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */,
-				42F10EAE2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift in Sources */,
 				42F10E752C91793100A8C2B3 /* UIViewController+.swift in Sources */,
 				42F10E702C9178EE00A8C2B3 /* NetworkError.swift in Sources */,
 				42F10E6B2C91780500A8C2B3 /* Image.swift in Sources */,
 				42F10EAC2C93154300A8C2B3 /* String+.swift in Sources */,
-				42F10E8B2C917B2C00A8C2B3 /* DetailedPresenter.swift in Sources */,
 				42F10E8F2C917B9E00A8C2B3 /* HistoryResultsViewController.swift in Sources */,
 				42F10E8D2C917B6900A8C2B3 /* MainViewController.swift in Sources */,
 				42F10E692C9177D000A8C2B3 /* Response.swift in Sources */,
@@ -396,7 +385,6 @@
 				42F10E7E2C917A0D00A8C2B3 /* Constants.swift in Sources */,
 				42F10E952C9199A900A8C2B3 /* NetworkManagerProtocol.swift in Sources */,
 				42F10EAA2C92EA8400A8C2B3 /* MainViewControllerProtocol.swift in Sources */,
-				42F10EA42C92DF9700A8C2B3 /* DetailedPresenterProtocol.swift in Sources */,
 				42F10E372C9176FE00A8C2B3 /* SceneDelegate.swift in Sources */,
 				42F10E7C2C9179B600A8C2B3 /* LoadingView.swift in Sources */,
 				42F10E6D2C91782700A8C2B3 /* User.swift in Sources */,

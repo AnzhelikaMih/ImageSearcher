@@ -77,13 +77,14 @@ final class DetailedViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Constants.Colors.backgroungColor
         setupView()
         configureView()
     }
 
     // MARK: - Private functions
     private func setupView() {
+        view.backgroundColor = Constants.Colors.backgroungColor
+        
         view.addSubview(imageView)
         view.addSubview(descriptionLabel)
         view.addSubview(authorLabel)

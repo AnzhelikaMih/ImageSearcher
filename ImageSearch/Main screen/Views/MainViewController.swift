@@ -96,7 +96,6 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
         searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = Constants.Titles.placeholder
-        searchController.searchBar.tintColor = Constants.Colors.mainTextColor
         searchController.searchBar.delegate = self
         searchController.showsSearchResultsController = true
     }
@@ -183,8 +182,8 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
     }
     
     func goToPhotoDetails(photo: Image) {
-        let detailVC = DetailViewController(photo: photo)
-        navigationController?.pushViewController(detailVC, animated: true)
+        let detailedVC = DetailedViewController(photo: photo)
+        navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
 
