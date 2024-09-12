@@ -14,6 +14,7 @@ final class LoadingView: UICollectionReusableView {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
+        activityIndicator.color = Constants.Colors.secondryTextColor
         return activityIndicator
     }()
     

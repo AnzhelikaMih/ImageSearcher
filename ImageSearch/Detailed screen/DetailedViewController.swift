@@ -8,11 +8,7 @@
 import UIKit
 import Photos
 
-protocol DetailViewControllerProtocol {
-    
-}
-
-class DetailViewController: UIViewController {
+final class DetailedViewController: UIViewController {
     // MARK: - Properties
     var photo: Image
     
@@ -63,6 +59,7 @@ class DetailViewController: UIViewController {
     
     private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = Constants.Colors.secondryTextColor
         indicator.hidesWhenStopped = true
         return indicator
     }()

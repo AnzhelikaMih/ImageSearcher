@@ -58,6 +58,7 @@ final class SearchCollectionCell: UICollectionViewCell {
     
     private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = Constants.Colors.secondryTextColor
         indicator.hidesWhenStopped = true
         return indicator
     }()

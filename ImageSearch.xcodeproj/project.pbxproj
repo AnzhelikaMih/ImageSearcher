@@ -33,6 +33,7 @@
 		42F10EA42C92DF9700A8C2B3 /* DetailedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */; };
 		42F10EAA2C92EA8400A8C2B3 /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */; };
 		42F10EAC2C93154300A8C2B3 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EAB2C93154300A8C2B3 /* String+.swift */; };
+		42F10EAE2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenterProtocol.swift; sourceTree = "<group>"; };
 		42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
 		42F10EAB2C93154300A8C2B3 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */,
+				42F10EAD2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift */,
 				42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */,
 				42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */,
 			);
@@ -379,6 +382,7 @@
 				42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */,
 				42F10E912C917BBF00A8C2B3 /* SearchCollectionCell.swift in Sources */,
 				42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */,
+				42F10EAE2C93220B00A8C2B3 /* DetailedViewControllerProtocol.swift in Sources */,
 				42F10E752C91793100A8C2B3 /* UIViewController+.swift in Sources */,
 				42F10E702C9178EE00A8C2B3 /* NetworkError.swift in Sources */,
 				42F10E6B2C91780500A8C2B3 /* Image.swift in Sources */,
