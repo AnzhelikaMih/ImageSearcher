@@ -5,4 +5,6 @@
 //  Created by Анжелика on 12.09.24.
 //
 
-import Foundation
+protocol DetailedPresenterProtocol {
+
+}

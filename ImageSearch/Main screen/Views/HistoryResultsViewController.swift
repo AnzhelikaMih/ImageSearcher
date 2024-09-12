@@ -1,16 +1,17 @@
 //
-//  SearchResultsViewController.swift
+//  HistoryResultsViewController.swift
 //  ImageSearch
 //
 //  Created by Анжелика on 11.09.24.
 //
 
 import UIKit
+
 protocol HistoryResultsViewControllerDelegate: AnyObject {
     func didSelectHistoryItem(historyItem: String)
 }
 
-class HistoryResultsViewController: UIViewController {
+final class HistoryResultsViewController: UIViewController {
     // MARK: - Properties
     weak var delegate: HistoryResultsViewControllerDelegate?
     

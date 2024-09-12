@@ -9,7 +9,7 @@ import UIKit
 
 final class MainPresenter: MainPresenterProtocol {
     // MARK: - Properties
-    weak private var view: MainViewControllerProtocol?
+    weak private var controller: MainViewControllerProtocol?
     private let networkService: NetworkManagerProtocol
     private let userDefaultsManager: UserDefaultsManager
     private var photoSearchResponse: Response?
@@ -26,8 +26,8 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     // MARK: - Public functions
-    func attachView(view: MainViewControllerProtocol) {
-        self.view = view
+    func loadView(controller: MainViewControllerProtocol) {
+        self.controller = controller
     }
     
     func performPhotoSearch(query: String,
@@ -35,7 +35,7 @@ final class MainPresenter: MainPresenterProtocol {
                             orderBy: String = Constants.Keys.orderBy
     ) {
         DispatchQueue.main.async {
-            self.view?.startActivityIndicator()
+            self.controller?.startActivityIndicator()
         }
         
         DispatchQueue.global().async {
@@ -48,18 +48,18 @@ final class MainPresenter: MainPresenterProtocol {
                     self.totalPages = response.totalPages
                     
                     DispatchQueue.main.async {
-                        self.view?.stopActivityIndicator()
+                        self.controller?.stopActivityIndicator()
                         if page == 1 {
-                            self.view?.updateSearch(photos: response.results)
+                            self.controller?.updateSearch(photos: response.results)
                         } else {
-                            self.view?.updateSearch(photos: self.photoSearchResponse?.results ?? [])
+                            self.controller?.updateSearch(photos: self.photoSearchResponse?.results ?? [])
                         }
                         self.hasMorePhotos = page < self.totalPages
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        self.view?.stopActivityIndicator()
-                        self.view?.handleError(error.description)
+                        self.controller?.stopActivityIndicator()
+                        self.controller?.handleError(error.description)
                     }
                 }
             }
@@ -68,18 +68,18 @@ final class MainPresenter: MainPresenterProtocol {
     
     func resetPhotoSearch() {
         photoSearchResponse = nil
-        view?.updateSearch(photos: [])
-        view?.resetView()
+        controller?.updateSearch(photos: [])
+        controller?.resetView()
     }
     
     func getPreviousResults(term: String?) {
         let historyItems = userDefaultsManager.getFilteredSearchHistory(for: term ?? .init())
-        view?.updateHistory(queries: historyItems)
+        controller?.updateHistory(queries: historyItems)
     }
     
     func goToPhotoDetails(selectedIndex: Int) {
         guard let currentPhotoResponse = photoSearchResponse else { return }
         let selectedPhoto = currentPhotoResponse.results[selectedIndex]
-        view?.goToPhotoDetails(photo: selectedPhoto)
+        controller?.goToPhotoDetails(photo: selectedPhoto)
     }
 }
