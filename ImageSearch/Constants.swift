@@ -9,7 +9,7 @@ import UIKit
 
 enum Constants {
     enum Titles {
-        static let appTitle = "ImageSearcher"
+        static let appTitle = "ImageSearch"
         static let okTitle = "OK"
         static let placeholder = "Enter to search"
         static let backButton = "Back"
