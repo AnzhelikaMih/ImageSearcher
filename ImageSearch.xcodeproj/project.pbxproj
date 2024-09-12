@@ -33,6 +33,8 @@
 		42F10E972C91A2E000A8C2B3 /* URLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */; };
 		42F10E9D2C91D32000A8C2B3 /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */; };
 		42F10EA22C91DC1400A8C2B3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */; };
+		42F10EA42C92DF9700A8C2B3 /* DetailedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */; };
+		42F10EAA2C92EA8400A8C2B3 /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfiguration.swift; sourceTree = "<group>"; };
 		42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
 		42F10EA12C91DC1400A8C2B3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenterProtocol.swift; sourceTree = "<group>"; };
+		42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,8 +172,8 @@
 		42F10E662C91779B00A8C2B3 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				42F10E642C91775D00A8C2B3 /* NetworkManager.swift */,
 				42F10E942C9199A900A8C2B3 /* NetworkManagerProtocol.swift */,
+				42F10E642C91775D00A8C2B3 /* NetworkManager.swift */,
 				42F10E962C91A2E000A8C2B3 /* URLConfiguration.swift */,
 				42F10E6F2C9178EE00A8C2B3 /* NetworkError.swift */,
 			);
@@ -225,6 +229,7 @@
 		42F10E992C91A5A200A8C2B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42F10EA92C92EA8400A8C2B3 /* MainViewControllerProtocol.swift */,
 				42F10E8C2C917B6900A8C2B3 /* MainViewController.swift */,
 				42F10E8E2C917B9E00A8C2B3 /* SearchResultsViewController.swift */,
 				42F10E902C917BBF00A8C2B3 /* SearchCollectionCell.swift */,
@@ -237,6 +242,7 @@
 			children = (
 				42F10E882C917B0200A8C2B3 /* DetailedViewController.swift */,
 				42F10E8A2C917B2C00A8C2B3 /* DetailedPresenter.swift */,
+				42F10EA32C92DF9600A8C2B3 /* DetailedPresenterProtocol.swift */,
 			);
 			path = "Detailed screen";
 			sourceTree = "<group>";
@@ -244,8 +250,8 @@
 		42F10E9B2C91AAE100A8C2B3 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				42F10E922C917BD600A8C2B3 /* MainPresenter.swift */,
 				42F10E9C2C91D32000A8C2B3 /* MainPresenterProtocol.swift */,
+				42F10E922C917BD600A8C2B3 /* MainPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -406,6 +412,8 @@
 				42F10E352C9176FE00A8C2B3 /* AppDelegate.swift in Sources */,
 				42F10E7E2C917A0D00A8C2B3 /* Constants.swift in Sources */,
 				42F10E952C9199A900A8C2B3 /* NetworkManagerProtocol.swift in Sources */,
+				42F10EAA2C92EA8400A8C2B3 /* MainViewControllerProtocol.swift in Sources */,
+				42F10EA42C92DF9700A8C2B3 /* DetailedPresenterProtocol.swift in Sources */,
 				42F10E372C9176FE00A8C2B3 /* SceneDelegate.swift in Sources */,
 				42F10E7C2C9179B600A8C2B3 /* LoadingView.swift in Sources */,
 				42F10E6D2C91782700A8C2B3 /* User.swift in Sources */,

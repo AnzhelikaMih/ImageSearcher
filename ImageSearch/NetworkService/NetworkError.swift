@@ -6,7 +6,6 @@
 //
 
 enum NetworkError: Error {
-    
     case invalidURL
     case unableToComplete
     case invalidResponse
@@ -15,13 +14,13 @@ enum NetworkError: Error {
     var description: String {
         switch self {
         case .invalidURL:
-            return "Invalid URL. Please try again."
+            return Constants.Errors.invalidURL
         case .unableToComplete:
-            return "Unable to complete. Please, check internet connection"
+            return Constants.Errors.unableToComplete
         case .invalidResponse:
-            return "Invalid response from the server. Please, try again."
+            return Constants.Errors.invalidResponse
         case .invalidData:
-            return "The data received from the server was invalid. Please try again."
+            return Constants.Errors.invalidData
         }
     }
 }

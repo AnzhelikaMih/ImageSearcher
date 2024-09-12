@@ -8,9 +8,7 @@
 import UIKit
 
 final class LoadingView: UICollectionReusableView {
-    // MARK: - Properties
-    static let reuseId = "LoadingView"
-    
+
     // MARK: - Components
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -29,7 +27,7 @@ final class LoadingView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
+    // MARK: - Private methods
     private func setupView() {
         addSubview(activityIndicator)
         
@@ -39,4 +37,3 @@ final class LoadingView: UICollectionReusableView {
         ])
     }
 }
-

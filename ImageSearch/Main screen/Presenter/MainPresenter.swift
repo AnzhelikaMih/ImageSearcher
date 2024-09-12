@@ -8,7 +8,6 @@
 import UIKit
 
 final class MainPresenter: MainPresenterProtocol {
-    
     // MARK: - Properties
     weak private var view: MainViewControllerProtocol?
     private let networkService: NetworkManagerProtocol
@@ -84,4 +83,3 @@ final class MainPresenter: MainPresenterProtocol {
         view?.goToPhotoDetails(photo: selectedPhoto)
     }
 }
-

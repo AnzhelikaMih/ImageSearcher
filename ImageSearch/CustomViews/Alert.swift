@@ -8,11 +8,6 @@
 import UIKit
 
 final class Alert {
-    // MARK: - Constants
-    private enum Constants {
-        static let okTitle: String = "OK"
-    }
-    
     // MARK: - Attribute
     struct Attribute {
         let title: String?
@@ -28,7 +23,7 @@ final class Alert {
         ) {
             self.title = title
             self.message = message
-            self.actions = actions.isEmpty ? [createAction(title: Constants.okTitle, style: .default)] : actions
+            self.actions = actions.isEmpty ? [createAction(title: Constants.Titles.okTitle, style: .default)] : actions
             self.preferredStyle = preferredStyle
         }
     }

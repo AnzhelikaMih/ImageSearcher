@@ -8,13 +8,12 @@
 import UIKit
 
 final class NetworkManager: NetworkManagerProtocol {
-    
     // MARK: - Properties
     static let shared = NetworkManager()
     private var session = URLSession.shared
     private let cache   = NSCache<NSString, UIImage>()
     
-    // MARK: - Init
+    // MARK: - Initialization
     init(session: URLSession = .shared) {
         self.session = session
     }
@@ -35,7 +34,7 @@ final class NetworkManager: NetworkManagerProtocol {
             URLQueryItem(name: "query", value: query),
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "per_page", value: "\(perPage)"),
-            URLQueryItem(name: "order_by", value: orderBy ?? "relevant"),
+            URLQueryItem(name: "order_by", value: orderBy ?? "popular"),
             URLQueryItem(name: "client_id", value: config.accessKey)
         ]
         
@@ -101,7 +100,7 @@ final class NetworkManager: NetworkManagerProtocol {
         }.resume()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Private Methods
     private func executeRequest<T: Decodable>(url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
          session.dataTask(with: url) { data, response, error in
              if error != nil {

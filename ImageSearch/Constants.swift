@@ -8,11 +8,17 @@
 import UIKit
 
 enum Constants {
+    enum Titles {
+        static let appTitle = "ImageSearcher"
+        static let okTitle = "OK"
+        static let placeholder = "Enter to search"
+        static let backButton = "Back"
+    }
+    
     enum Colors {
-        static let backgroungColor   = UIColor.white
-        static let mainTextColor     = UIColor.darkText
+        static let backgroungColor = UIColor.white
+        static let mainTextColor = UIColor.darkText
         static let secondryTextColor = UIColor.lightText
-        static let backgroungSecondryColor = UIColor.clear
     }
     
     enum SystemImage {
@@ -23,18 +29,23 @@ enum Constants {
     enum Keys {
         static let historyPhotoKey = "HistoryPhotoKey"
         static let historyCellKey = "HistoryCellKey"
-        static let orderBy = "relevant"
+        static let orderBy = "popular"
+        static let loadingReuseId = "LoadingView"
     }
     
     enum Font {
         static let neading = UIFont.systemFont(ofSize: 22, weight: .bold)
         static let subheading = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let bodyText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let metadata = UIFont.systemFont(ofSize: 12, weight: .light)
+        static let likesText = UIFont.systemFont(ofSize: 12, weight: .light)
     }
     
     enum Errors {
         static let queryError = "Search query cannot be empty"
+        static let invalidURL = "Invalid URL. Please try again."
+        static let unableToComplete = "Unable to complete. Please, check internet connection."
+        static let invalidResponse = "Invalid response from the server. Please, try again."
+        static let invalidData = "The data received from the server was invalid. Please try again."
     }
 }
 

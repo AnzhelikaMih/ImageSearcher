@@ -10,7 +10,7 @@ class DependencyManager {
     static func createSearchNC() -> UIViewController {
         let presenter = MainPresenter()
         let searchVC = MainViewController(presenter: presenter)
-        searchVC.title = "ImageSearcher"
+        searchVC.title = Constants.Titles.appTitle
         return searchVC
     }
 

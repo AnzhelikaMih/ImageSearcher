@@ -8,7 +8,6 @@
 import Foundation
 
 final class UserDefaultsManager {
-    
     // MARK: - Properties
     private let defaults = UserDefaults.standard
     private let historyKey = Constants.Keys.historyPhotoKey
