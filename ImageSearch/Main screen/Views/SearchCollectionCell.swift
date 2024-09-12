@@ -7,9 +7,8 @@
 
 import UIKit
 
-class SearchCollectionCell: UICollectionViewCell {
-    static let reuseIdentifier = "SearchCollectionCell"
-    
+final class SearchCollectionCell: UICollectionViewCell {
+    // MARK: - Components
     private let mainImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -22,7 +21,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.textColor = Constants.Colors.mainTextColor
-        label.font = Constants.Font.subheading
+        label.font = Constants.Font.medium
         return label
     }()
     
@@ -30,7 +29,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = Constants.Colors.secondryTextColor
-        label.font = Constants.Font.likesText
+        label.font = Constants.Font.xs
         return label
     }()
     
@@ -53,7 +52,7 @@ class SearchCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = Constants.Colors.secondryTextColor
-        label.font = Constants.Font.likesText
+        label.font = Constants.Font.xs
         return label
     }()
     
@@ -63,6 +62,7 @@ class SearchCollectionCell: UICollectionViewCell {
         return indicator
     }()
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -79,6 +79,24 @@ class SearchCollectionCell: UICollectionViewCell {
         fatalError("This class does not support NSCoder")
     }
     
+    // MARK: - Public functions
+    func configureCell(photo: Image) {
+        descriptionLabel.text = photo.altDescription ?? "No description"
+        dateLabel.text = photo.createdAt?.formatDate()
+        likesLabel.text = String(photo.likes ?? 0)
+        
+        guard let urlPhoto = photo.urls?.regular else { return }
+        loadingIndicator.startAnimating()
+        
+        NetworkManager.shared.downloadImage(from: urlPhoto) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.mainImageView.image = image
+                self?.loadingIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    // MARK: - Private functions
     private func setupConstraints() {
         mainImageView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -107,36 +125,4 @@ class SearchCollectionCell: UICollectionViewCell {
             descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10)
         ])
     }
-    
-    func configureCell(photo: Image) {
-        descriptionLabel.text = photo.altDescription ?? "No description"
-        dateLabel.text = formatDate(from: photo.createdAt)
-        likesLabel.text = String(photo.likes ?? 0)
-        
-        guard let urlPhoto = photo.urls?.regular else { return }
-        loadingIndicator.startAnimating()
-        
-        NetworkManager.shared.downloadImage(from: urlPhoto) { [weak self] image in
-            DispatchQueue.main.async {
-                self?.mainImageView.image = image
-                self?.loadingIndicator.stopAnimating()
-            }
-        }
-    }
-    
-    private func formatDate(from isoDate: String?) -> String {
-        guard let isoDate = isoDate else { return "Unknown date" }
-        
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime]
-        
-        if let date = isoFormatter.date(from: isoDate) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            return dateFormatter.string(from: date)
-        }
-        
-        return "Invalid date"
-    }
 }
-

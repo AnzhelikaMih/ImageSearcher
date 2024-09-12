@@ -6,14 +6,13 @@
 //
 
 import UIKit
-protocol SearchResultsViewControllerDelegate: AnyObject {
+protocol HistoryResultsViewControllerDelegate: AnyObject {
     func didSelectHistoryItem(historyItem: String)
 }
 
-class SearchResultsViewController: UIViewController {
-    
+class HistoryResultsViewController: UIViewController {
     // MARK: - Properties
-    weak var delegate: SearchResultsViewControllerDelegate?
+    weak var delegate: HistoryResultsViewControllerDelegate?
     
     private lazy var dataSource = createDataSource()
     private lazy var tableView: UITableView = {
@@ -85,7 +84,7 @@ class SearchResultsViewController: UIViewController {
 
 }
 
-extension SearchResultsViewController: UITableViewDelegate {
+extension HistoryResultsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedCell = tableView.cellForRow(at: indexPath),
            let historyItem = selectedCell.textLabel?.text {

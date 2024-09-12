@@ -37,13 +37,14 @@ enum Constants {
         static let historyCellKey = "HistoryCellKey"
         static let orderBy = "popular"
         static let loadingReuseId = "LoadingView"
+        static let reuseIdentifierCell = "SearchCollectionCell"
     }
     
     enum Font {
-        static let neading = UIFont.systemFont(ofSize: 22, weight: .bold)
-        static let subheading = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let bodyText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let likesText = UIFont.systemFont(ofSize: 12, weight: .light)
+        static let large = UIFont.systemFont(ofSize: 22, weight: .bold)
+        static let medium = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        static let small = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let xs = UIFont.systemFont(ofSize: 12, weight: .light)
     }
     
     enum Errors {
@@ -54,4 +55,3 @@ enum Constants {
         static let invalidData = "The data received from the server was invalid. Please try again."
     }
 }
-
