@@ -13,12 +13,18 @@ enum Constants {
         static let okTitle = "OK"
         static let placeholder = "Enter to search"
         static let backButton = "Back"
+        static let saveButton = "Save to Gallery"
+        static let shareButton = "Share"
     }
     
     enum Colors {
         static let backgroungColor = UIColor.white
+        static let secondaryBackgroungColor = UIColor.lightGray
         static let mainTextColor = UIColor.darkText
-        static let secondryTextColor = UIColor.lightText
+        static let secondryTextColor = UIColor.darkGray
+        static let heartColor = UIColor.red
+        static let buttonColor = UIColor.gray
+        static let buttonColorLight = UIColor.lightGray
     }
     
     enum SystemImage {

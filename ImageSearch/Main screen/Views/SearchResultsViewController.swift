@@ -48,7 +48,7 @@ class SearchResultsViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Keys.historyCellKey, for: indexPath)
             cell.backgroundColor = Constants.Colors.backgroungColor
             cell.textLabel?.text = itemIdentifier
-            cell.textLabel?.textColor = .black
+            cell.textLabel?.textColor = Constants.Colors.mainTextColor
             return cell
         })
         return dataSource

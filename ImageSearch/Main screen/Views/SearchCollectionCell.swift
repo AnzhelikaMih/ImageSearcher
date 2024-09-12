@@ -21,7 +21,7 @@ class SearchCollectionCell: UICollectionViewCell {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        label.textColor = .black
+        label.textColor = Constants.Colors.mainTextColor
         label.font = Constants.Font.subheading
         return label
     }()
@@ -29,7 +29,7 @@ class SearchCollectionCell: UICollectionViewCell {
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .darkGray
+        label.textColor = Constants.Colors.secondryTextColor
         label.font = Constants.Font.likesText
         return label
     }()
@@ -44,7 +44,7 @@ class SearchCollectionCell: UICollectionViewCell {
     
     private lazy var likesImageView: UIImageView = {
         let imageView = UIImageView(image: Constants.SystemImage.heart)
-        imageView.tintColor = .red
+        imageView.tintColor = Constants.Colors.heartColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -52,7 +52,7 @@ class SearchCollectionCell: UICollectionViewCell {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .darkGray
+        label.textColor = Constants.Colors.secondryTextColor
         label.font = Constants.Font.likesText
         return label
     }()
