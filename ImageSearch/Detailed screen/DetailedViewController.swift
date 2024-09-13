@@ -25,6 +25,7 @@ final class DetailedViewController: UIViewController {
         let label = UILabel()
         label.textColor = Constants.Colors.mainTextColor
         label.numberOfLines = 0
+        label.font = Constants.Font.medium
         label.textAlignment = .center
         return label
     }()
@@ -32,7 +33,7 @@ final class DetailedViewController: UIViewController {
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.textColor = Constants.Colors.mainTextColor
-        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.font = Constants.Font.small
         label.textAlignment = .center
         return label
     }()

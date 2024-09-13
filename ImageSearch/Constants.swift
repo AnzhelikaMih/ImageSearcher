@@ -42,7 +42,7 @@ enum Constants {
     
     enum Font {
         static let large = UIFont.systemFont(ofSize: 22, weight: .bold)
-        static let medium = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        static let medium = UIFont.systemFont(ofSize: 16, weight: .light)
         static let small = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let xs = UIFont.systemFont(ofSize: 12, weight: .light)
     }
